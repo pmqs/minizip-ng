@@ -19,6 +19,7 @@
 
 int32_t mz_stream_open(void *stream, const char *path, int32_t mode) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_open%s\n", path);
     if (!strm || !strm->vtbl || !strm->vtbl->open)
         return MZ_STREAM_ERROR;
     return strm->vtbl->open(strm, path, mode);

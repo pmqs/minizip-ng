@@ -34,6 +34,7 @@ int32_t mz_stream_is_open(void *stream) {
 
 int32_t mz_stream_read(void *stream, void *buf, int32_t size) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_read\n");
     if (!strm || !strm->vtbl || !strm->vtbl->read)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(strm) != MZ_OK)
@@ -46,6 +47,7 @@ static int32_t mz_stream_read_value(void *stream, uint64_t *value, int32_t len) 
     int32_t n = 0;
     int32_t i = 0;
 
+    printf("mz_stream_read_value\n");
     *value = 0;
     if (mz_stream_read(stream, buf, len) == len) {
         for (n = 0; n < len; n += 1, i += 8)

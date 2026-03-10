@@ -117,6 +117,8 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
     if (mode & MZ_OPEN_MODE_APPEND)
         return mz_stream_os_seek(stream, 0, MZ_SEEK_END);
 
+    printf("mz_stream_os_open %s\n", "end");
+
     return MZ_OK;
 }
 
@@ -132,6 +134,7 @@ int32_t mz_stream_os_is_open(void *stream) {
 int32_t mz_stream_os_read(void *stream, void *buf, int32_t size) {
     mz_stream_win32 *win32 = (mz_stream_win32 *)stream;
     uint32_t read = 0;
+    printf("mz_stream_os_read top\n");
 
     if (mz_stream_os_is_open(stream) != MZ_OK)
     return MZ_OPEN_ERROR;

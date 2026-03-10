@@ -103,6 +103,7 @@ int32_t mz_stream_read_uint64(void *stream, uint64_t *value) {
 
 int32_t mz_stream_write(void *stream, const void *buf, int32_t size) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_write\n");
     if (size == 0)
         return size;
     if (!strm || !strm->vtbl || !strm->vtbl->write)
@@ -170,6 +171,7 @@ int32_t mz_stream_copy_stream(void *target, mz_stream_write_cb write_cb, void *s
     int32_t bytes_to_copy = 0;
     int32_t read = 0;
     int32_t written = 0;
+    printf("mz_stream_copy_stream\n");
 
     if (!write_cb)
         write_cb = mz_stream_write;
@@ -197,6 +199,7 @@ int32_t mz_stream_copy_stream_to_end(void *target, mz_stream_write_cb write_cb, 
     uint8_t buf[16384];
     int32_t read = 0;
     int32_t written = 0;
+    printf("mz_stream_copy_stream_to_end\n");
 
     if (!write_cb)
         write_cb = mz_stream_write;
@@ -219,6 +222,7 @@ int32_t mz_stream_copy_stream_to_end(void *target, mz_stream_write_cb write_cb, 
 
 int64_t mz_stream_tell(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_tell\n");
     if (!strm || !strm->vtbl || !strm->vtbl->tell)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(strm) != MZ_OK)
@@ -228,6 +232,7 @@ int64_t mz_stream_tell(void *stream) {
 
 int32_t mz_stream_seek(void *stream, int64_t offset, int32_t origin) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_seek\n");
     if (!strm || !strm->vtbl || !strm->vtbl->seek)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(strm) != MZ_OK)
@@ -248,6 +253,7 @@ int32_t mz_stream_find(void *stream, const void *find, int32_t find_size, int64_
     int32_t i = 0;
     uint8_t first = 1;
     int32_t err = MZ_OK;
+    printf("mz_stream_find\n");
 
     if (!stream || !find || !position)
         return MZ_PARAM_ERROR;
@@ -308,6 +314,7 @@ int32_t mz_stream_find_reverse(void *stream, const void *find, int32_t find_size
     uint8_t first = 1;
     int32_t i = 0;
     int32_t err = MZ_OK;
+    printf("mz_stream_find_reverse\n");
 
     if (!stream || !find || !position)
         return MZ_PARAM_ERROR;
@@ -364,6 +371,7 @@ int32_t mz_stream_find_reverse(void *stream, const void *find, int32_t find_size
 
 int32_t mz_stream_close(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_close\n");
     if (!strm || !strm->vtbl || !strm->vtbl->close)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(stream) != MZ_OK)
@@ -373,6 +381,7 @@ int32_t mz_stream_close(void *stream) {
 
 int32_t mz_stream_error(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_error\n");
     if (!strm || !strm->vtbl || !strm->vtbl->error)
         return MZ_PARAM_ERROR;
     return strm->vtbl->error(strm);
@@ -381,11 +390,13 @@ int32_t mz_stream_error(void *stream) {
 int32_t mz_stream_set_base(void *stream, void *base) {
     mz_stream *strm = (mz_stream *)stream;
     strm->base = (mz_stream *)base;
+    printf("mz_stream_set_base\n");
     return MZ_OK;
 }
 
 void *mz_stream_get_interface(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_get_interface\n");
     if (!strm || !strm->vtbl)
         return NULL;
     return (void *)strm->vtbl;
@@ -393,6 +404,7 @@ void *mz_stream_get_interface(void *stream) {
 
 int32_t mz_stream_get_prop_int64(void *stream, int32_t prop, int64_t *value) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_get_prop_int64\n");
     if (!strm || !strm->vtbl || !strm->vtbl->get_prop_int64)
         return MZ_PARAM_ERROR;
     return strm->vtbl->get_prop_int64(strm, prop, value);
@@ -406,6 +418,7 @@ int32_t mz_stream_set_prop_int64(void *stream, int32_t prop, int64_t value) {
 }
 
 void *mz_stream_create(mz_stream_vtbl *vtbl) {
+    printf("mz_stream_create\n");
     if (!vtbl || !vtbl->create)
         return NULL;
     return vtbl->create();
@@ -413,6 +426,7 @@ void *mz_stream_create(mz_stream_vtbl *vtbl) {
 
 void mz_stream_delete(void **stream) {
     mz_stream *strm = NULL;
+    printf("mz_stream_delete\n");
     if (!stream)
         return;
     strm = (mz_stream *)*stream;

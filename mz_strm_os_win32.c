@@ -111,6 +111,7 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
 
     if (mz_stream_os_is_open(stream) != MZ_OK) {
         win32->error = GetLastError();
+        printf("mz_stream_os_open win32->error %d\n", win32->error);
         return MZ_OPEN_ERROR;
     }
 

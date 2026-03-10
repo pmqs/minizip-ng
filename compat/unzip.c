@@ -43,6 +43,7 @@ unzFile unzOpen64(const void *path) {
 unzFile unzOpen2(const char *path, zlib_filefunc_def *pzlib_filefunc_def) {
     unzFile unz = NULL;
     void *stream = NULL;
+    printf("unzOpen2 %s\n", path);
 
     if (pzlib_filefunc_def) {
         if (pzlib_filefunc_def->zopen_file) {
@@ -80,6 +81,7 @@ unzFile unzOpen2(const char *path, zlib_filefunc_def *pzlib_filefunc_def) {
 unzFile unzOpen2_64(const void *path, zlib_filefunc64_def *pzlib_filefunc_def) {
     unzFile unz = NULL;
     void *stream = NULL;
+    printf("unzOpen2_64 %s\n", path);
 
     if (pzlib_filefunc_def) {
         if (pzlib_filefunc_def->zopen64_file) {

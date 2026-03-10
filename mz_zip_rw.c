@@ -102,6 +102,7 @@ int32_t mz_zip_reader_open(void *handle, void *stream) {
 int32_t mz_zip_reader_open_file(void *handle, const char *path) {
     mz_zip_reader *reader = (mz_zip_reader *)handle;
     int32_t err = MZ_OK;
+    printf("mz_zip_reader_open_file %s\n", "");
 
     if (!reader)
         return MZ_PARAM_ERROR;
@@ -1215,6 +1216,7 @@ int32_t mz_zip_writer_open_file(void *handle, const char *path, int64_t disk_siz
     int32_t err = MZ_OK;
     int32_t err_cb = 0;
     char directory[320];
+    printf("mz_zip_writer_open_file %s\n", "");
 
     if (!writer)
         return MZ_PARAM_ERROR;

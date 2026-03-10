@@ -125,7 +125,7 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
 
 int32_t mz_stream_os_is_open(void *stream) {
     mz_stream_win32 *win32 = (mz_stream_win32 *)stream;
-    printf("mz_stream_os_is_open %d %d \n", win32->handle, win32->handle == INVALID_HANDLE_VALUE);
+    printf("mz_stream_os_is_open %d %d %d \n", win32->handle && win32->handle != INVALID_HANDLE_VALUE), win32->handle, win32->handle == INVALID_HANDLE_VALUE);
 
     if (!win32->handle || win32->handle == INVALID_HANDLE_VALUE)
         return MZ_OPEN_ERROR;

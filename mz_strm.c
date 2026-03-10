@@ -20,8 +20,11 @@
 int32_t mz_stream_open(void *stream, const char *path, int32_t mode) {
     mz_stream *strm = (mz_stream *)stream;
     printf("mz_stream_open %s\n", path);
-    if (!strm || !strm->vtbl || !strm->vtbl->open)
+    if (!strm || !strm->vtbl || !strm->vtbl->open) {
+    printf("mz_stream_open %s\n", "MZ_STREAM_ERROR");
         return MZ_STREAM_ERROR;
+    }
+    printf("mz_stream_open %s\n", "call vtbl");
     return strm->vtbl->open(strm, path, mode);
 }
 

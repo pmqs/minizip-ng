@@ -75,6 +75,7 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
     uint32_t flags_attribs = FILE_ATTRIBUTE_NORMAL;
     wchar_t *path_wide = NULL;
 
+    printf("mz_stream_os_open %s\n", path);
     if (!path)
         return MZ_PARAM_ERROR;
 
@@ -121,6 +122,8 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
 
 int32_t mz_stream_os_is_open(void *stream) {
     mz_stream_win32 *win32 = (mz_stream_win32 *)stream;
+    printf("mz_stream_os_is_open\n");
+
     if (!win32->handle || win32->handle == INVALID_HANDLE_VALUE)
         return MZ_OPEN_ERROR;
     return MZ_OK;
@@ -131,13 +134,14 @@ int32_t mz_stream_os_read(void *stream, void *buf, int32_t size) {
     uint32_t read = 0;
 
     if (mz_stream_os_is_open(stream) != MZ_OK)
-        return MZ_OPEN_ERROR;
+    return MZ_OPEN_ERROR;
 
     if (!ReadFile(win32->handle, buf, size, (DWORD *)&read, NULL)) {
         win32->error = GetLastError();
         if (win32->error == ERROR_HANDLE_EOF)
-            win32->error = 0;
+        win32->error = 0;
     }
+    printf("mz_stream_os_read %u\n", read);
 
     mz_stream_os_print("Win32 - Read - %" PRId32 "\n", read);
 

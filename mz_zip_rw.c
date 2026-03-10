@@ -127,7 +127,7 @@ int32_t mz_zip_reader_open_file(void *handle, const char *path) {
     mz_stream_set_base(reader->buffered_stream, reader->file_stream);
     mz_stream_set_base(reader->split_stream, reader->buffered_stream);
 
-    err = mz_stream_open(reader->split_stream, MZ_OPEN_MODE_READ);
+    err = mz_stream_open(reader->split_stream, path, MZ_OPEN_MODE_READ);
     printf("GOT 1: %d %s\n", err, path);
     if (err == MZ_OK) {
         err = mz_zip_reader_open(reader, reader->split_stream);

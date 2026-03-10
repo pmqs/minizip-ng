@@ -141,6 +141,7 @@ int32_t mz_zip_reader_open_file_in_memory(void *handle, const char *path) {
     void *file_stream = NULL;
     int64_t file_size = 0;
     int32_t err = 0;
+    printf("mz_zip_reader_open_file_in_memory %s\n", path);
 
     if (!reader)
         return MZ_PARAM_ERROR;
@@ -674,6 +675,7 @@ int32_t mz_zip_reader_entry_save_file(void *handle, const char *path) {
     int32_t err_cb = MZ_OK;
     char *pathwfs = NULL;
     char *directory = NULL;
+    printf("mz_zip_reader_entry_save_file %s\n", path);
 
     if (mz_zip_reader_is_open(reader) != MZ_OK)
         return MZ_PARAM_ERROR;
@@ -1277,6 +1279,7 @@ int32_t mz_zip_writer_open_file_in_memory(void *handle, const char *path) {
     void *file_stream = NULL;
     int64_t file_size = 0;
     int32_t err = 0;
+    printf("mz_zip_writer_open_file_in_memory %s\n", path);
 
     if (!writer)
         return MZ_PARAM_ERROR;
@@ -1634,6 +1637,7 @@ int32_t mz_zip_writer_add_file(void *handle, const char *path, const char *filen
     void *stream = NULL;
     char link_path[1024];
     const char *filename = filename_in_zip;
+    printf("mz_zip_writer_add_file %s\n", path);
 
     if (mz_zip_writer_is_open(writer) != MZ_OK)
         return MZ_PARAM_ERROR;

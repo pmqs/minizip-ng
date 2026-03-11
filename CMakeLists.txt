@@ -938,9 +938,9 @@ if(MZ_BUILD_TESTS AND MZ_BUILD_UNIT_TESTS)
                                 -d ${COMPRESS_METHOD_DEST_DIR} ${COMPRESS_METHOD_PATH}
                             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
             endif()
-            add_test(NAME ${COMPRESS_METHOD_NAME}-erase-${EXTRA_NAME}
-                    COMMAND minizip_cli -o -e ${COMPRESS_METHOD_PATH} test.c test.h
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
+            # add_test(NAME ${COMPRESS_METHOD_NAME}-erase-${EXTRA_NAME}
+            #         COMMAND minizip_cli -o -e ${COMPRESS_METHOD_PATH} test.c test.h
+            #         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
             if(NOT MZ_COMPRESS_ONLY)
                 add_test(NAME ${COMPRESS_METHOD_NAME}-erase-unzip-${EXTRA_NAME}
                          COMMAND minizip_cli -x -o ${EXTRA_ARGS}

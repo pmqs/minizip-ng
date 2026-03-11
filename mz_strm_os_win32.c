@@ -102,10 +102,10 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
         return MZ_PARAM_ERROR;
 
 #if _WIN32_WINNT >= _WIN32_WINNT_WIN8
-    printf("Using CreateFile2\n");
+    printf("Using CreateFile2 '%s' '%S'\n", path, path_wide);
     win32->handle = CreateFile2(path_wide, desired_access, share_mode, creation_disposition, NULL);
 #else
-    printf("Using CreateFileW\n");
+    printf("Using CreateFileW %s %S\n", path, path_wide);
     win32->handle = CreateFileW(path_wide, desired_access, share_mode, NULL, creation_disposition, flags_attribs, NULL);
 #endif
 

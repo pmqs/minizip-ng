@@ -140,6 +140,7 @@ static int32_t mz_stream_split_open_disk(void *stream, int32_t number_disk) {
 
 static int32_t mz_stream_split_close_disk(void *stream) {
     mz_stream_split *split = (mz_stream_split *)stream;
+    printf("mz_stream_split_close_disk\n");
 
     if (mz_stream_is_open(split->stream.base) != MZ_OK)
         return MZ_OK;
@@ -152,6 +153,7 @@ static int32_t mz_stream_split_goto_disk(void *stream, int32_t number_disk) {
     mz_stream_split *split = (mz_stream_split *)stream;
     int32_t err = MZ_OK;
     int32_t err_is_open = MZ_OK;
+    printf("mz_stream_split_goto_disk %d\n", number_disk);
 
     err_is_open = mz_stream_is_open(split->stream.base);
 
@@ -173,6 +175,7 @@ static int32_t mz_stream_split_goto_disk(void *stream, int32_t number_disk) {
 int32_t mz_stream_split_open(void *stream, const char *path, int32_t mode) {
     mz_stream_split *split = (mz_stream_split *)stream;
     int32_t number_disk = 0;
+    printf("mz_stream_split_open %s\n", path);
 
     split->mode = mode;
     split->path_cd = strdup(path);
@@ -206,6 +209,7 @@ int32_t mz_stream_split_open(void *stream, const char *path, int32_t mode) {
 
 int32_t mz_stream_split_is_open(void *stream) {
     mz_stream_split *split = (mz_stream_split *)stream;
+    printf("mz_stream_split_is_open %d\n", split->is_open == 1);
     if (split->is_open != 1)
         return MZ_OPEN_ERROR;
     return MZ_OK;

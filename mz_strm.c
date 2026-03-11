@@ -30,6 +30,7 @@ int32_t mz_stream_open(void *stream, const char *path, int32_t mode) {
 
 int32_t mz_stream_is_open(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
+    printf("mz_stream_is_open %s %d\n", "", !(!strm || !strm->vtbl || !strm->vtbl->is_open));
     if (!strm || !strm->vtbl || !strm->vtbl->is_open)
         return MZ_STREAM_ERROR;
     return strm->vtbl->is_open(strm);

@@ -72,6 +72,7 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
     const char *mode_fopen = NULL;
     int mode_open = 0;
     int fd;
+    printf("mz_stream_os_open posix %s\n", path);
 
     if (!path)
         return MZ_PARAM_ERROR;

@@ -100,11 +100,14 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
     }
     if (!posix->handle) {
         posix->error = errno;
+        printf("mz_stream_os_open posix error %d \n", errno);
         return MZ_OPEN_ERROR;
     }
 
     if (mode & MZ_OPEN_MODE_APPEND)
         return mz_stream_os_seek(stream, 0, MZ_SEEK_END);
+
+    printf("mz_stream_os_open posix %s\n", "ok");
 
     return MZ_OK;
 }

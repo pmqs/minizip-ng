@@ -140,12 +140,12 @@ int32_t mz_stream_os_read(void *stream, void *buf, int32_t size) {
     printf("mz_stream_os_read top\n");
 
     if (mz_stream_os_is_open(stream) != MZ_OK)
-    return MZ_OPEN_ERROR;
+        return MZ_OPEN_ERROR;
 
     if (!ReadFile(win32->handle, buf, size, (DWORD *)&read, NULL)) {
         win32->error = GetLastError();
         if (win32->error == ERROR_HANDLE_EOF)
-        win32->error = 0;
+            win32->error = 0;
     }
     printf("mz_stream_os_read %u\n", read);
 

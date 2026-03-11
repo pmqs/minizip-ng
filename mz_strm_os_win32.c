@@ -75,7 +75,7 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
     uint32_t flags_attribs = FILE_ATTRIBUTE_NORMAL;
     wchar_t *path_wide = NULL;
 
-    printf("mz_stream_os_open %s\n", path);
+    // printf("mz_stream_os_open %s\n", path);
     if (!path)
         return MZ_PARAM_ERROR;
 
@@ -102,10 +102,10 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
         return MZ_PARAM_ERROR;
 
 #if _WIN32_WINNT >= _WIN32_WINNT_WIN8
-    printf("Using CreateFile2 '%s' '%S'\n", path, path_wide);
+    // printf("Using CreateFile2 '%s' '%S'\n", path, path_wide);
     win32->handle = CreateFile2(path_wide, desired_access, share_mode, creation_disposition, NULL);
 #else
-    printf("Using CreateFileW %s %S\n", path, path_wide);
+    // printf("Using CreateFileW %s %S\n", path, path_wide);
     win32->handle = CreateFileW(path_wide, desired_access, share_mode, NULL, creation_disposition, flags_attribs, NULL);
 #endif
 
@@ -120,14 +120,14 @@ int32_t mz_stream_os_open(void *stream, const char *path, int32_t mode) {
     if (mode & MZ_OPEN_MODE_APPEND)
         return mz_stream_os_seek(stream, 0, MZ_SEEK_END);
 
-    printf("mz_stream_os_open %s\n", "end");
+    // printf("mz_stream_os_open %s\n", "end");
 
     return MZ_OK;
 }
 
 int32_t mz_stream_os_is_open(void *stream) {
     mz_stream_win32 *win32 = (mz_stream_win32 *)stream;
-    printf("mz_stream_os_is_open %d %d %d \n", win32->handle && win32->handle != INVALID_HANDLE_VALUE, win32->handle, win32->handle == INVALID_HANDLE_VALUE);
+    // printf("mz_stream_os_is_open %d %d %d \n", win32->handle && win32->handle != INVALID_HANDLE_VALUE, win32->handle, win32->handle == INVALID_HANDLE_VALUE);
 
     if (!win32->handle || win32->handle == INVALID_HANDLE_VALUE)
         return MZ_OPEN_ERROR;
@@ -137,7 +137,7 @@ int32_t mz_stream_os_is_open(void *stream) {
 int32_t mz_stream_os_read(void *stream, void *buf, int32_t size) {
     mz_stream_win32 *win32 = (mz_stream_win32 *)stream;
     uint32_t read = 0;
-    printf("mz_stream_os_read top\n");
+    // printf("mz_stream_os_read top\n");
 
     if (mz_stream_os_is_open(stream) != MZ_OK)
         return MZ_OPEN_ERROR;
@@ -147,7 +147,7 @@ int32_t mz_stream_os_read(void *stream, void *buf, int32_t size) {
         if (win32->error == ERROR_HANDLE_EOF)
             win32->error = 0;
     }
-    printf("mz_stream_os_read %u\n", read);
+    // printf("mz_stream_os_read %u\n", read);
 
     mz_stream_os_print("Win32 - Read - %" PRId32 "\n", read);
 

@@ -19,18 +19,18 @@
 
 int32_t mz_stream_open(void *stream, const char *path, int32_t mode) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_open %s\n", path);
+    // printf("mz_stream_open %s\n", path);
     if (!strm || !strm->vtbl || !strm->vtbl->open) {
-        printf("mz_stream_open %s\n", "MZ_STREAM_ERROR");
+        // printf("mz_stream_open %s\n", "MZ_STREAM_ERROR");
         return MZ_STREAM_ERROR;
     }
-    printf("mz_stream_open %s\n", "call vtbl");
+    // printf("mz_stream_open %s\n", "call vtbl");
     return strm->vtbl->open(strm, path, mode);
 }
 
 int32_t mz_stream_is_open(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_is_open %s %d\n", "", !(!strm || !strm->vtbl || !strm->vtbl->is_open));
+    // printf("mz_stream_is_open %s %d\n", "", !(!strm || !strm->vtbl || !strm->vtbl->is_open));
     if (!strm || !strm->vtbl || !strm->vtbl->is_open)
         return MZ_STREAM_ERROR;
     return strm->vtbl->is_open(strm);
@@ -38,7 +38,7 @@ int32_t mz_stream_is_open(void *stream) {
 
 int32_t mz_stream_read(void *stream, void *buf, int32_t size) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_read\n");
+    // printf("mz_stream_read\n");
     if (!strm || !strm->vtbl || !strm->vtbl->read)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(strm) != MZ_OK)
@@ -51,7 +51,7 @@ static int32_t mz_stream_read_value(void *stream, uint64_t *value, int32_t len) 
     int32_t n = 0;
     int32_t i = 0;
 
-    printf("mz_stream_read_value\n");
+    // printf("mz_stream_read_value\n");
     *value = 0;
     if (mz_stream_read(stream, buf, len) == len) {
         for (n = 0; n < len; n += 1, i += 8)
@@ -107,7 +107,7 @@ int32_t mz_stream_read_uint64(void *stream, uint64_t *value) {
 
 int32_t mz_stream_write(void *stream, const void *buf, int32_t size) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_write\n");
+    // printf("mz_stream_write\n");
     if (size == 0)
         return size;
     if (!strm || !strm->vtbl || !strm->vtbl->write)
@@ -175,7 +175,7 @@ int32_t mz_stream_copy_stream(void *target, mz_stream_write_cb write_cb, void *s
     int32_t bytes_to_copy = 0;
     int32_t read = 0;
     int32_t written = 0;
-    printf("mz_stream_copy_stream\n");
+    // printf("mz_stream_copy_stream\n");
 
     if (!write_cb)
         write_cb = mz_stream_write;
@@ -226,7 +226,7 @@ int32_t mz_stream_copy_stream_to_end(void *target, mz_stream_write_cb write_cb, 
 
 int64_t mz_stream_tell(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_tell\n");
+    // printf("mz_stream_tell\n");
     if (!strm || !strm->vtbl || !strm->vtbl->tell)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(strm) != MZ_OK)
@@ -236,7 +236,7 @@ int64_t mz_stream_tell(void *stream) {
 
 int32_t mz_stream_seek(void *stream, int64_t offset, int32_t origin) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_seek\n");
+    // printf("mz_stream_seek\n");
     if (!strm || !strm->vtbl || !strm->vtbl->seek)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(strm) != MZ_OK)
@@ -257,7 +257,7 @@ int32_t mz_stream_find(void *stream, const void *find, int32_t find_size, int64_
     int32_t i = 0;
     uint8_t first = 1;
     int32_t err = MZ_OK;
-    printf("mz_stream_find\n");
+    // printf("mz_stream_find\n");
 
     if (!stream || !find || !position)
         return MZ_PARAM_ERROR;
@@ -318,7 +318,7 @@ int32_t mz_stream_find_reverse(void *stream, const void *find, int32_t find_size
     uint8_t first = 1;
     int32_t i = 0;
     int32_t err = MZ_OK;
-    printf("mz_stream_find_reverse\n");
+    // printf("mz_stream_find_reverse\n");
 
     if (!stream || !find || !position)
         return MZ_PARAM_ERROR;
@@ -375,7 +375,7 @@ int32_t mz_stream_find_reverse(void *stream, const void *find, int32_t find_size
 
 int32_t mz_stream_close(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_close\n");
+    // printf("mz_stream_close\n");
     if (!strm || !strm->vtbl || !strm->vtbl->close)
         return MZ_PARAM_ERROR;
     if (mz_stream_is_open(stream) != MZ_OK)
@@ -385,7 +385,7 @@ int32_t mz_stream_close(void *stream) {
 
 int32_t mz_stream_error(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_error\n");
+    // printf("mz_stream_error\n");
     if (!strm || !strm->vtbl || !strm->vtbl->error)
         return MZ_PARAM_ERROR;
     return strm->vtbl->error(strm);
@@ -394,13 +394,13 @@ int32_t mz_stream_error(void *stream) {
 int32_t mz_stream_set_base(void *stream, void *base) {
     mz_stream *strm = (mz_stream *)stream;
     strm->base = (mz_stream *)base;
-    printf("mz_stream_set_base\n");
+    // printf("mz_stream_set_base\n");
     return MZ_OK;
 }
 
 void *mz_stream_get_interface(void *stream) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_get_interface\n");
+    // printf("mz_stream_get_interface\n");
     if (!strm || !strm->vtbl)
         return NULL;
     return (void *)strm->vtbl;
@@ -408,7 +408,7 @@ void *mz_stream_get_interface(void *stream) {
 
 int32_t mz_stream_get_prop_int64(void *stream, int32_t prop, int64_t *value) {
     mz_stream *strm = (mz_stream *)stream;
-    printf("mz_stream_get_prop_int64\n");
+    // printf("mz_stream_get_prop_int64\n");
     if (!strm || !strm->vtbl || !strm->vtbl->get_prop_int64)
         return MZ_PARAM_ERROR;
     return strm->vtbl->get_prop_int64(strm, prop, value);
@@ -422,7 +422,7 @@ int32_t mz_stream_set_prop_int64(void *stream, int32_t prop, int64_t value) {
 }
 
 void *mz_stream_create(mz_stream_vtbl *vtbl) {
-    printf("mz_stream_create\n");
+    // printf("mz_stream_create\n");
     if (!vtbl || !vtbl->create)
         return NULL;
     return vtbl->create();
@@ -430,7 +430,7 @@ void *mz_stream_create(mz_stream_vtbl *vtbl) {
 
 void mz_stream_delete(void **stream) {
     mz_stream *strm = NULL;
-    printf("mz_stream_delete\n");
+    // printf("mz_stream_delete\n");
     if (!stream)
         return;
     strm = (mz_stream *)*stream;

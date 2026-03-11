@@ -73,7 +73,7 @@ int32_t mz_stream_buffered_open(void *stream, const char *path, int32_t mode) {
     mz_stream_buffered *buffered = (mz_stream_buffered *)stream;
     mz_stream_buffered_print("Buffered - Open (mode %" PRId32 ")\n", mode);
     mz_stream_buffered_reset(buffered);
-    printf("mz_stream_buffered_open %s\n", path);
+    // printf("mz_stream_buffered_open %s\n", path);
 
     return mz_stream_open(buffered->stream.base, path, mode);
 }

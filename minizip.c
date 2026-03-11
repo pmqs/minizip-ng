@@ -353,7 +353,6 @@ int32_t minizip_extract_overwrite_cb(void *handle, void *userdata, mz_zip_file *
     MZ_UNUSED(handle);
     MZ_UNUSED(file_info);
 
-    printf("minizip_extract_overwrite_cb %s\n", path);
     /* Verify if we want to overwrite current entry on disk */
     if (!options->overwrite) {
         char rep = 0;

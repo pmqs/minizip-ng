@@ -55,7 +55,6 @@ zipFile zipOpen2(const char *path, int append, zipcharpc *globalcomment, zlib_fi
     zipFile zip = NULL;
     int32_t mode = zipConvertAppendToStreamMode(append);
     void *stream = NULL;
-    printf("zipOpen2 %s\n", path);
 
     if (pzlib_filefunc_def) {
         if (pzlib_filefunc_def->zopen_file) {
@@ -95,7 +94,6 @@ zipFile zipOpen2_64(const void *path, int append, zipcharpc *globalcomment, zlib
     zipFile zip = NULL;
     int32_t mode = zipConvertAppendToStreamMode(append);
     void *stream = NULL;
-    printf("zipOpen2_64 %s\n", path);
 
     if (pzlib_filefunc_def) {
         if (pzlib_filefunc_def->zopen64_file) {

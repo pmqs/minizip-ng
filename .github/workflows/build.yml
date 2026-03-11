@@ -255,7 +255,7 @@ jobs:
       run: cmake --build ${{ matrix.build-dir || '.' }} --config ${{ matrix.build-config || 'Release' }}
 
     - name: Run test cases
-      run: ctest --output-on-failure -C ${{ matrix.build-config || 'Release' }}
+      run: ctest --output-on-failure -C ${{ matrix.build-config || 'Release' }} -V
       working-directory: ${{ matrix.build-dir }}
 
     - name: Setup python
